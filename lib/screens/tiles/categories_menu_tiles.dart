@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:lojavirtual/screens/products_view.dart';
 
 class CategoriesTiles extends StatelessWidget {
   final DocumentSnapshot snapshot;
@@ -12,6 +13,10 @@ class CategoriesTiles extends StatelessWidget {
     return Container(
       margin: EdgeInsets.only(bottom: 30),
       child: ListTile(
+        onTap: () {
+          Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => ProductsView(snapshot)));
+        },
         leading: CircleAvatar(
           backgroundImage: NetworkImage(data['icon']),
           backgroundColor: Colors.grey[200],
