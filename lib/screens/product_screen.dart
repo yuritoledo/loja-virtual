@@ -14,7 +14,15 @@ class ProductScreen extends StatefulWidget {
 class _ProductScreenState extends State<ProductScreen> {
   final ProductData product;
 
+  String selectedSize;
+
   _ProductScreenState(this.product);
+
+  void _selectSize(String selected) {
+    setState(() {
+      selectedSize = selected;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,17 +40,52 @@ class _ProductScreenState extends State<ProductScreen> {
           ),
         ),
         Padding(
-          padding: EdgeInsets.all(16.8),
+          padding: EdgeInsets.all(16.0),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               Text(product.title,
-                  style: TextStyle(fontWeight: FontWeight.w500, fontSize: 26)),
+                  maxLines: 3,
+                  style: TextStyle(fontWeight: FontWeight.w500, fontSize: 22)),
               Text('R\$ ${product.price.toStringAsFixed(2)}',
                   style: TextStyle(
                       fontWeight: FontWeight.w500,
                       color: primaryColor,
-                      fontSize: 26)),
+                      fontSize: 24)),
+              SizedBox(height: 8),
+              Text('Tamanhos',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400)),
+              SizedBox(
+                  height: 40,
+                  child: GridView(
+                    scrollDirection: Axis.horizontal,
+                    padding: EdgeInsets.symmetric(vertical: 4.0),
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        childAspectRatio: 0.5,
+                        crossAxisCount: 1,
+                        mainAxisSpacing: 8),
+                    children: product.sizes.map((size) {
+                      return GestureDetector(
+                        onTap: () => _selectSize(size),
+                        child: Container(
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(4.0)),
+                              color: selectedSize == size ? primaryColor : null,
+                              border:
+                                  Border.all(color: primaryColor, width: 2.0)),
+                          child: Text(
+                            size,
+                            style: TextStyle(
+                                color: selectedSize == size
+                                    ? Colors.white
+                                    : primaryColor),
+                          ),
+                        ),
+                      );
+                    }).toList(),
+                  )),
             ],
           ),
         )

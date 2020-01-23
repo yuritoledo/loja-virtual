@@ -10,8 +10,6 @@ class ProductTile extends StatelessWidget {
   ProductTile(this.type, this.product);
   @override
   Widget build(BuildContext context) {
-    print(type);
-
     final String formattedPrice =
         'R\$ ${product.price.toStringAsFixed(2).replaceFirst('.', ',')}';
     return InkWell(
