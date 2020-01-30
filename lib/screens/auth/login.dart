@@ -15,7 +15,15 @@ class LoginScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('Login'),
         centerTitle: true,
-        actions: <Widget>[],
+        actions: <Widget>[
+          FlatButton(
+            onPressed: () {},
+            child: Text(
+              'CRIAR CONTA',
+              style: TextStyle(color: Colors.white),
+            ),
+          )
+        ],
       ),
       body: Form(
         key: formKey,
@@ -23,6 +31,7 @@ class LoginScreen extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 16),
           children: <Widget>[
             TextFormField(
+              keyboardType: TextInputType.emailAddress,
               validator: (text) =>
                   text.isEmpty || !text.contains('@') ? 'Email inválido' : null,
               decoration: InputDecoration(
@@ -30,6 +39,7 @@ class LoginScreen extends StatelessWidget {
               ),
             ),
             TextFormField(
+              obscureText: true,
               validator: (text) => text.isEmpty ? 'Senha inválida' : null,
               decoration: InputDecoration(
                 hintText: 'Senha',
@@ -48,10 +58,9 @@ class LoginScreen extends StatelessWidget {
             RaisedButton(
               onPressed: _submit,
               child: Text(
-                'Acessar',
+                'ACESSAR',
                 style: TextStyle(color: Colors.white),
               ),
-              color: primaryColor,
             )
           ],
         ),
