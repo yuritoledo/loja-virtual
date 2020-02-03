@@ -19,9 +19,8 @@ class RegisterScreen extends StatelessWidget {
             buildTextFormField('Nome', 'O nome é obrigatório'),
             buildTextFormField('Email', 'O email é obrigatório'),
             buildTextFormField('Senha', 'A senha é obrigatória!'),
-            SizedBox(
-              height: 32,
-            ),
+            buildTextFormField('Endereço', 'O endereço é obrigatório!'),
+            SizedBox(height: 32),
             RaisedButton(
               onPressed: submit,
               child: Text('CRIAR CONTA', style: TextStyle(color: Colors.white)),
@@ -35,6 +34,7 @@ class RegisterScreen extends StatelessWidget {
   Widget buildTextFormField(String name, String errorMessage) {
     return TextFormField(
       decoration: InputDecoration(hintText: name),
+      obscureText: name == 'Senha' ? true : false,
       validator: (text) => text.isEmpty ? errorMessage : null,
     );
   }

@@ -34,8 +34,12 @@ class ProductsView extends StatelessWidget {
                   .getDocuments(),
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
-                  return Center(
-                    child: CircularProgressIndicator(),
+                  return Container(
+                    height: 80.0,
+                    width: 80.0,
+                    child: Center(
+                      child: CircularProgressIndicator(),
+                    ),
                   );
                 } else {
                   return TabBarView(children: <Widget>[

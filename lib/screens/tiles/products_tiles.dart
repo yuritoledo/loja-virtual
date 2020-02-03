@@ -24,7 +24,7 @@ class ProductTile extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     AspectRatio(
-                      aspectRatio: 0.8,
+                      aspectRatio: 0.82,
                       child: Image.network(
                         product.images[0],
                         fit: BoxFit.cover,
@@ -34,7 +34,7 @@ class ProductTile extends StatelessWidget {
                       padding: EdgeInsets.all(8.0),
                       child: Column(
                         children: <Widget>[
-                          Text(product.title, style: TextStyle(fontSize: 20)),
+                          Text(product.title, style: TextStyle(fontSize: 18)),
                           Text(
                             formattedPrice,
                             style: TextStyle(
