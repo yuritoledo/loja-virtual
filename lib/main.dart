@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lojavirtual/model/user_model.dart';
-import 'package:lojavirtual/screens/auth/login.dart';
+import 'package:lojavirtual/screens/home_screen.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 void main() => runApp(MyApp());
@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
               primaryColor: Color.fromARGB(255, 1, 125, 141),
               buttonColor: Color.fromARGB(255, 1, 125, 141)),
           debugShowCheckedModeBanner: false,
-          home: LoginScreen()),
+          home: HomeScreen()),
     );
     // home: RegisterScreen());
   }
