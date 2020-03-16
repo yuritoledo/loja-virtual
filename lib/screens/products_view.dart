@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:lojavirtual/datas/product.dart';
 import 'package:lojavirtual/screens/tiles/products_tiles.dart';
+import 'package:lojavirtual/widgets/cart_button.dart';
 
 class ProductsView extends StatelessWidget {
   final DocumentSnapshot snapshot;
@@ -13,6 +14,7 @@ class ProductsView extends StatelessWidget {
     return DefaultTabController(
         length: 2,
         child: Scaffold(
+            floatingActionButton: CartButton(),
             appBar: AppBar(
               title: Text(snapshot['title']),
               centerTitle: true,
@@ -51,19 +53,19 @@ class ProductsView extends StatelessWidget {
                           childAspectRatio: 0.65),
                       itemCount: snapshot.data.documents.length,
                       itemBuilder: (context, index) {
-                        return ProductTile(
-                            'grid',
-                            ProductData.fromDocument(
-                                snapshot.data.documents[index]));
+                        ProductData productData = ProductData.fromDocument(
+                            snapshot.data.documents[index]);
+                        productData.category = this.snapshot.documentID;
+                        return ProductTile('grid', productData);
                       },
                     ),
                     ListView.builder(
                       itemCount: snapshot.data.documents.length,
                       itemBuilder: (context, index) {
-                        return ProductTile(
-                            'list',
-                            ProductData.fromDocument(
-                                snapshot.data.documents[index]));
+                        ProductData productData = ProductData.fromDocument(
+                            snapshot.data.documents[index]);
+                        productData.category = this.snapshot.documentID;
+                        return ProductTile('grid', productData);
                       },
                     )
                   ]);

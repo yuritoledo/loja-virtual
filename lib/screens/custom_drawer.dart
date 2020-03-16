@@ -24,7 +24,6 @@ class CustomDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScopedModelDescendant<UserModel>(
       builder: (context, child, model) {
-        print(model.userData);
         return Drawer(
           child: Stack(
             children: <Widget>[

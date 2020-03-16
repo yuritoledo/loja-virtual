@@ -1,6 +1,11 @@
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:flutter/material.dart';
+import 'package:lojavirtual/datas/cart.dart';
 import 'package:lojavirtual/datas/product.dart';
+import 'package:lojavirtual/model/cart_model.dart';
+import 'package:lojavirtual/model/user_model.dart';
+import 'package:lojavirtual/screens/auth/login.dart';
+import 'package:lojavirtual/widgets/cart_button.dart';
 
 class ProductScreen extends StatefulWidget {
   final ProductData product;
@@ -24,11 +29,28 @@ class _ProductScreenState extends State<ProductScreen> {
     });
   }
 
+  void _addToCart() {
+    if (UserModel.of(context).isLogged()) {
+      CartData data = CartData(
+          category: product.category,
+          pid: product.id,
+          size: selectedSize,
+          quantity: 1,
+          productData: product);
+
+      CartModel.of(context).addCartItem(data);
+    } else {
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => LoginScreen()));
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final primaryColor = Theme.of(context).primaryColor;
 
     return Scaffold(
+      floatingActionButton: CartButton(),
       appBar: AppBar(title: Text(product.title), centerTitle: true),
       body: ListView(children: <Widget>[
         AspectRatio(
@@ -96,7 +118,7 @@ class _ProductScreenState extends State<ProductScreen> {
                     'Adicionar ao carrinho',
                     style: TextStyle(fontSize: 22),
                   ),
-                  onPressed: selectedSize == null ? null : () {},
+                  onPressed: selectedSize == null ? null : _addToCart,
                 ),
               ),
               SizedBox(height: 16),

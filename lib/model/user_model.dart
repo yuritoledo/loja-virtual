@@ -100,18 +100,22 @@ class UserModel extends Model {
     if (firebaseUser == null) {
       firebaseUser = await _auth.currentUser();
     }
-    if (userData == null) {
+    if (userData == null && firebaseUser != null) {
       userData = await feedUserData();
     }
     notifyListeners();
   }
 
   Future<Map<String, dynamic>> feedUserData() async {
-    DocumentSnapshot doc = await Firestore.instance
-        .collection('users')
-        .document(firebaseUser.uid)
-        .get();
-    return doc.data;
+    if (firebaseUser.uid.isNotEmpty) {
+      DocumentSnapshot doc = await Firestore.instance
+          .collection('users')
+          .document(firebaseUser.uid)
+          .get();
+      return doc.data;
+    }
+
+    return null;
   }
 
   void resetPassword(String email) {
