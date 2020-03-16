@@ -13,6 +13,9 @@ class CartData {
 
   ProductData productData;
 
+  CartData(
+      {this.pid, this.category, this.size, this.quantity, this.productData});
+
   CartData.fromDocument(DocumentSnapshot snapshot) {
     cid = snapshot.documentID;
 
@@ -25,7 +28,6 @@ class CartData {
 
   Map<String, dynamic> toMap() {
     return {
-      "cid": cid,
       "category": category,
       "pid": pid,
       "quantity": quantity,
