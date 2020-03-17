@@ -12,6 +12,10 @@ class CartModel extends Model {
 
   int quantityItems() => _products.length;
 
+  bool isLoading = false;
+
+  List<CartData> get products => _products;
+
   static CartModel of(BuildContext context) =>
       ScopedModel.of<CartModel>(context);
 
